@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Flora.jar" size="48887" download="eager" />
-    <jar href="lib\mysql-connector-java-5.1.18-bin.jar" size="789885" download="eager" />
+    <jar href="Flora.jar" size="49981" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.25.jar" size="2428320" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="flora.Flora"  name="Flora" />
   <update check="always"/>

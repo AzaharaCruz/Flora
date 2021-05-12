@@ -11,28 +11,54 @@ package conexion;
  */
 public class Plantas {
 
-    String Nombre;
-    String Descripcion;
+    private String nombre_comun;
+    private String descripcion;
+    private String localizacion;
+    private String nombre_cientifico;
 
-    public Plantas(String Nombre, String Descripcion) {
-        this.Nombre = Nombre;
-        this.Descripcion = Descripcion;
+    public Plantas(String nombre_comun, String descripcion, String localizacion, String nombre_cientifico) {
+        this.nombre_comun = nombre_comun;
+        this.descripcion = descripcion;
+        this.localizacion = localizacion;
+        this.nombre_cientifico = nombre_cientifico;
     }
 
-    public String getNombre() {
-        return Nombre;
+    Plantas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    public String getNombre_comun() {
+        return nombre_comun;
+    }
+
+    public void setNombre_comun(String nombre_comun) {
+        this.nombre_comun = nombre_comun;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
-    public void setDescripcion(String Descripcion) {
-        this.Descripcion = Descripcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(String localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public String getNombre_cientifico() {
+        return nombre_cientifico;
+    }
+
+    public void setNombre_cientifico(String nombre_cientifico) {
+        this.nombre_cientifico = nombre_cientifico;
     }
     
+
+
 }

@@ -98,9 +98,6 @@ public class ConsultaController implements Initializable {
         alerta.setTitle("Información");
         alerta.setHeaderText(null);
 
-        String Usuario;
-        String pass;
-
         if (encuentroRegistro( txtnombre.getText())) {
             paneResultados.getChildren().remove(grid);
             paneResultados.setVisible(true);

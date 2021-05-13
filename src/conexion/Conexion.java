@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,11 +84,12 @@ public class Conexion {
         return usuario1;
     }
     
-    public Plantas String (String nombre_cientifico,  String localizacion) {
+    public List<Planta> buscarPlantas (String nombrePlanta) {
+    List<Planta> lPlantas = new ArrayList<Planta>();
     Connection conexion = conectar ();
-    Plantas planta1 = null;
+    
     try {
-        String select = "select * from flora.plantas where nombre_cientifico = '" + nombre_cientifico + "' and localizacion = '"+localizacion+"'";
+        String select = "select * from flora.plantas where nombre_cientifico like '%" + nombrePlanta + "%' or nombre_comun like '%"+nombrePlanta+"%'";
         System.out.println("select:"+select);
         PreparedStatement ps = conexion.prepareStatement(select);
         ResultSet rs = ps.executeQuery();
@@ -97,20 +100,26 @@ public class Conexion {
                        System.out.println("El nombre comun es: "+rs.getString(1));
                        System.out.println("La descripcion es: "+rs.getString(2));
                        System.out.println("La localización es: "+rs.getString(3));
-                       System.out.println("El nombre cientifico es: "+rs.getString(4));
-                       
-                       planta1 = new Plantas();
+                       System.out.println("El color es: "+rs.getString(4));
+                       System.out.println("El nombre cientifico es: "+rs.getString(5));
+                       System.out.println("La imagen es "+rs.getString(6));
+
+                       Planta planta1 = new Planta();
                        planta1.setNombre_comun(rs.getString(1));
                        planta1.setDescripcion(rs.getString(2));
                        planta1.setLocalizacion(rs.getString(3));
-                       planta1.setNombre_cientifico(rs.getString(4));
+                       planta1.setColor(rs.getString(4));
+                       
+                       planta1.setNombre_cientifico(rs.getString(5));
+                       planta1.setImagen(rs.getString(6));
+                       lPlantas.add(planta1);
                                       
                    }
          //for por el resultset y crear lista de plantaas
     }catch(Exception e){
-    System.out.println ("Error en la consulta");
+    System.out.println ("Error en la consulta" + e.getLocalizedMessage());
     }
-        return planta1;
+        return lPlantas;
  
     }
     

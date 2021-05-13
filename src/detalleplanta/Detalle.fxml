@@ -1,11 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="detalleplanta.DetalleController">
-    
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: #daf794;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="detalleplanta.DetalleController">
+   <children>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="28.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img2.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="19.0" layoutY="128.0" text="Buscador de Flora" textFill="#464444">
+         <font>
+            <Font name="Impact" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="201.0" prefHeight="17.0" prefWidth="107.0" text="Nombre Común">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgresultado" fitHeight="235.0" fitWidth="364.0" layoutX="184.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="25.0" layoutY="255.0" prefHeight="17.0" prefWidth="107.0" text="Nombre Científico">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="295.0" prefHeight="17.0" prefWidth="107.0" text="Descripción">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="397.0" prefHeight="17.0" prefWidth="107.0" text="Localización">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="466.0" prefHeight="17.0" prefWidth="107.0" text="Color">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="509.0" prefHeight="17.0" prefWidth="107.0" text="Imagen">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtnombrecomun" layoutX="177.0" layoutY="197.0" prefHeight="25.0" prefWidth="293.0" />
+      <TextField fx:id="txtnombrecientifico" layoutX="177.0" layoutY="243.0" prefHeight="25.0" prefWidth="293.0" />
+      <TextField fx:id="txtdescripcion" layoutX="177.0" layoutY="291.0" prefHeight="100.0" prefWidth="447.0" />
+      <TextField fx:id="txtlocalizacion" layoutX="177.0" layoutY="402.0" prefHeight="56.0" prefWidth="447.0" />
+      <TextField fx:id="txtcolor" layoutX="177.0" layoutY="471.0" prefHeight="25.0" prefWidth="293.0" />
+   </children>
 </AnchorPane>

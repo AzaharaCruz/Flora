@@ -119,9 +119,55 @@ public class Conexion {
     }catch(Exception e){
     System.out.println ("Error en la consulta" + e.getLocalizedMessage());
     }
+    try {
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return lPlantas;
  
     }
-    
+    public Planta detallePlanta (String nombre_cientifico){
+        Planta plantaD= new Planta();
+        Connection conexion = conectar ();
+        try {
+        String select = "select * from flora.plantas where nombre_cientifico = ' nombre_cientifico ";
+        System.out.println("select: "+select);
+        PreparedStatement ps = conexion.prepareStatement(select);
+        ResultSet rs = ps.executeQuery();
+        System.out.println("conexion.Conexion.String()");
+        
+         while(rs.next()){
+                       System.out.println("*****************************************");
+                       System.out.println("El nombre comun es: "+rs.getString(1));
+                       System.out.println("La descripcion es: "+rs.getString(2));
+                       System.out.println("La localización es: "+rs.getString(3));
+                       System.out.println("El color es: "+rs.getString(4));
+                       System.out.println("El nombre cientifico es: "+rs.getString(5));
+                       System.out.println("La imagen es "+rs.getString(6));
+
+                       plantaD.setNombre_comun(rs.getString(1));
+                       plantaD.setDescripcion(rs.getString(2));
+                       plantaD.setLocalizacion(rs.getString(3));
+                       plantaD.setColor(rs.getString(4));
+                       plantaD.setNombre_cientifico(rs.getString(5));
+                       plantaD.setImagen(rs.getString(6));
+              
+                   }
+         //for por el resultset y crear lista de plantaas
+    }catch(Exception e){
+    System.out.println ("Error en la consulta" + e.getLocalizedMessage());
+    }
+        try {
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return plantaD;
+ 
+    }
 }
+        
+       
+
 

@@ -7,6 +7,7 @@ package consulta;
 
 import conexion.Conexion;
 import conexion.Planta;
+import detalleplanta.DetalleController;
 import flora.FXMLDocumentController;
 import java.io.IOException;
 import java.net.URL;
@@ -213,18 +214,21 @@ public class ConsultaController implements Initializable {
     private void detallePlanta(String nombrePlanta){
         System.out.println("consulta.ConsultaController.detallePlanta() " +nombrePlanta);
      //Mostrar nueva ventana   
-                 
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consulta/Consulta.fxml"));
-//              
-//            Parent root = loader.load();
-//            ConsultaController controlador = loader.getController();
-//            Scene scene = new Scene(root);
-//            Stage stage = new Stage();
-//            stage.setScene(scene);
-//            stage.setTitle("Detalle de " + nombrePlanta);
+ 
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/detalleplanta/Detalle.fxml"));
+            Parent root = loader.load();
+            DetalleController controlador = loader.getController();
+           Scene scene = new Scene(root);
+           Stage stage = new Stage();
+           stage.setScene(scene);
+           stage.setTitle("Detalle de " + nombrePlanta);
 
-//              Añadir al anchorPane los elementos (label:textfielf e imageView)
-//            stage.show();
+           stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ConsultaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
     }
     
      private boolean encuentroRegistro(String nombrePlanta){

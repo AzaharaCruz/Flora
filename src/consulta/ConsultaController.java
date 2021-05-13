@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -39,7 +40,7 @@ import javafx.stage.Stage;
  */
 public class ConsultaController implements Initializable {
 
-    private final static int TAMANIO_IMAGEN = 25;
+    private final static int TAMANIO_IMAGEN = 50;
     @FXML
     private TextField txtnombre;
     @FXML
@@ -105,9 +106,9 @@ public class ConsultaController implements Initializable {
             grid =new GridPane();
             grid.getColumnConstraints().add(new ColumnConstraints(150)); // column 0 is 100 wide
             grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 1 is 200 wide
-            grid.getColumnConstraints().add(new ColumnConstraints(2000)); // column 2 is 100 wide
-            grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 3 is 200 wide       
-            grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 4 is 200 wide
+            grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 2 is 100 wide
+            grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 3 is 200 wide       
+            //grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 4 is 200 wide
             grid.getRowConstraints().add(new RowConstraints (100));
                     
             //alerta.setContentText("Sesión iniciada correctamente");
@@ -125,22 +126,22 @@ public class ConsultaController implements Initializable {
             String resultado = "Se han econtrado " + lPlantas.size() + " resutlados";
             
             //Añadir aqui las cabeceras
-            Label nombreLabel = new Label("Nombre Común");
-            grid.setRowIndex(nombreLabel, 0);
-            grid.setColumnIndex(nombreLabel, 0);
-            Label nombreLabel2 = new Label("Nombre científico");
-            grid.setRowIndex(nombreLabel2, 0);
-            grid.setColumnIndex(nombreLabel2, 1);
-            Label nombreLabel3 = new Label("Descripción");
-            grid.setRowIndex(nombreLabel3, 0);
-            grid.setColumnIndex(nombreLabel3, 2);
-            Label nombreLabel4 = new Label("Imagen");
-            grid.setRowIndex(nombreLabel4, 0);
-            grid.setColumnIndex(nombreLabel4, 3);
-            Label nombreLabel5 = new Label("Localización");
-            grid.setRowIndex(nombreLabel5, 0);
-            grid.setColumnIndex(nombreLabel5, 4);
-            grid.getChildren().addAll(nombreLabel, nombreLabel2, nombreLabel3, nombreLabel4, nombreLabel5);
+            Label nombreC = new Label("Nombre Común");
+            grid.setRowIndex(nombreC, 0);
+            grid.setColumnIndex(nombreC, 0);
+            Label nombreCi = new Label("Nombre científico");
+            grid.setRowIndex(nombreCi, 0);
+            grid.setColumnIndex(nombreCi, 1);
+//            Label nombreLabel3 = new Label("Descripción");
+//            grid.setRowIndex(nombreLabel3, 0);
+//            grid.setColumnIndex(nombreLabel3, 2);
+            Label imagenT = new Label("Imagen");
+            grid.setRowIndex(imagenT, 0);
+            grid.setColumnIndex(imagenT, 2);
+            Label botonDetalle = new Label("");
+            grid.setRowIndex(botonDetalle, 0);
+            grid.setColumnIndex(botonDetalle, 3);
+            grid.getChildren().addAll(nombreC, nombreCi,  imagenT, botonDetalle);
 
             
             for(int i = 1, p = 0; p<lPlantas.size(); p++, i++){
@@ -164,19 +165,32 @@ public class ConsultaController implements Initializable {
                 grid.setRowIndex(nombreCN, i);
                 grid.setColumnIndex(nombreCN, 1);
                 
-                Label colorN = new Label(planta.getDescripcion());
-                grid.setRowIndex(colorN, i);
-                grid.setColumnIndex(colorN, 2);
+//                Label colorN = new Label(planta.getDescripcion());
+//                grid.setRowIndex(colorN, i);
+//                grid.setColumnIndex(colorN, 2);
                 
                  ImageView imagen = new ImageView(new Image("consulta/imagenes/"+planta.getImagen(), TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
                 grid.setRowIndex(imagen, i);
-                grid.setColumnIndex(imagen, 3);
+                grid.setColumnIndex(imagen, 2);
                 
-                Label lozalizacionN = new Label(planta.getLocalizacion());
-                grid.setRowIndex(lozalizacionN, i);
-                grid.setColumnIndex(lozalizacionN, 4);
+//                Label lozalizacionN = new Label(planta.getLocalizacion());
+//                grid.setRowIndex(lozalizacionN, i);
+//                grid.setColumnIndex(lozalizacionN, 4);
                 
-                grid.getChildren().addAll(nombreN, nombreCN, colorN, imagen, lozalizacionN);
+                Button boton = new Button("Ver detalle");
+                grid.setRowIndex(boton, i);
+                grid.setColumnIndex(boton, 4);
+                    boton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override public void handle(ActionEvent e) {
+                        boton.setText("Clicked");
+                        detallePlanta(planta.getNombre_comun());
+                    }
+});
+                // "detallePlanta(planta1.getNombre_counm()")
+                //boton.onMouseClickedProperty().addListener(listener);
+                
+                
+                grid.getChildren().addAll(nombreN, nombreCN,  imagen, boton);
             }
             paneResultados.getChildren().add(grid);
             alerta.setContentText(resultado);
@@ -194,6 +208,25 @@ public class ConsultaController implements Initializable {
             alerta.showAndWait();
         }
     }
+    
+    @FXML
+    private void detallePlanta(String nombrePlanta){
+        System.out.println("consulta.ConsultaController.detallePlanta() " +nombrePlanta);
+     //Mostrar nueva ventana   
+                 
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consulta/Consulta.fxml"));
+//              
+//            Parent root = loader.load();
+//            ConsultaController controlador = loader.getController();
+//            Scene scene = new Scene(root);
+//            Stage stage = new Stage();
+//            stage.setScene(scene);
+//            stage.setTitle("Detalle de " + nombrePlanta);
+
+//              Añadir al anchorPane los elementos (label:textfielf e imageView)
+//            stage.show();
+    }
+    
      private boolean encuentroRegistro(String nombrePlanta){
         Conexion conexion = new Conexion();
         lPlantas = conexion.buscarPlantas(nombrePlanta);

@@ -28,6 +28,10 @@ public class Planta {
         this.imagen = imagen;
                
     }
+
+    Planta() {
+       
+    }
     public String getColor() {
         return color;
     }
@@ -43,13 +47,7 @@ public class Planta {
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    
-    
-  
-
-    Planta() {
-    }
-
+   
     public String getNombre_comun() {
         return nombre_comun;
     }

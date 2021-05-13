@@ -29,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 /**
@@ -43,16 +44,16 @@ public class ConsultaController implements Initializable {
     private TextField txtnombre;
     @FXML
     private Button btbuscar;
-    @FXML
-    private Label nombre;
-    @FXML
-    private Label nombrec;
-    @FXML
-    private Label color;
-    @FXML
-    private Label localizacion;
-    @FXML
-    private ImageView img;
+//    @FXML
+//    private Label nombre;
+//    @FXML
+//    private Label nombrec;
+//    @FXML
+//    private Label color;
+//    @FXML
+//    private Label localizacion;
+//    @FXML
+//    private ImageView img;
     
     @FXML
     private GridPane grid;
@@ -98,14 +99,16 @@ public class ConsultaController implements Initializable {
         String Usuario;
         String pass;
 
-        if (encuentroRegistro(txtnombre.getText())) {
+        if (encuentroRegistro( txtnombre.getText())) {
+            paneResultados.getChildren().remove(grid);
             paneResultados.setVisible(true);
             grid =new GridPane();
-            grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 0 is 100 wide
+            grid.getColumnConstraints().add(new ColumnConstraints(150)); // column 0 is 100 wide
             grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 1 is 200 wide
-            grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 2 is 100 wide
+            grid.getColumnConstraints().add(new ColumnConstraints(2000)); // column 2 is 100 wide
             grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 3 is 200 wide       
             grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 4 is 200 wide
+            grid.getRowConstraints().add(new RowConstraints (100));
                     
             //alerta.setContentText("Sesión iniciada correctamente");
 //                    try {
@@ -122,20 +125,33 @@ public class ConsultaController implements Initializable {
             String resultado = "Se han econtrado " + lPlantas.size() + " resutlados";
             
             //Añadir aqui las cabeceras
-            Label nombreLabel = new Label("Nombre");
-
-            grid.getChildren().addAll(nombreLabel, nombreLabel, nombreLabel, nombreLabel, nombreLabel);
+            Label nombreLabel = new Label("Nombre Común");
+            grid.setRowIndex(nombreLabel, 0);
+            grid.setColumnIndex(nombreLabel, 0);
+            Label nombreLabel2 = new Label("Nombre científico");
+            grid.setRowIndex(nombreLabel2, 0);
+            grid.setColumnIndex(nombreLabel2, 1);
+            Label nombreLabel3 = new Label("Descripción");
+            grid.setRowIndex(nombreLabel3, 0);
+            grid.setColumnIndex(nombreLabel3, 2);
+            Label nombreLabel4 = new Label("Imagen");
+            grid.setRowIndex(nombreLabel4, 0);
+            grid.setColumnIndex(nombreLabel4, 3);
+            Label nombreLabel5 = new Label("Localización");
+            grid.setRowIndex(nombreLabel5, 0);
+            grid.setColumnIndex(nombreLabel5, 4);
+            grid.getChildren().addAll(nombreLabel, nombreLabel2, nombreLabel3, nombreLabel4, nombreLabel5);
 
             
-            for(int i = 0; i<lPlantas.size(); i++){
-                Planta planta = lPlantas.get(i);
+            for(int i = 1, p = 0; p<lPlantas.size(); p++, i++){
+                Planta planta = lPlantas.get(p);
                 
                 resultado +=planta.getNombre_cientifico();
-                img.setImage(new Image("consulta/imagenes/"+planta.getImagen(), TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
-                nombre.setText(planta.getNombre_comun());
-                nombrec.setText(planta.getNombre_cientifico());
-                color.setText(planta.getColor());
-                localizacion.setText(planta.getLocalizacion());
+//                img.setImage(new Image("consulta/imagenes/"+planta.getImagen(), TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
+//                nombre.setText(planta.getNombre_comun());
+//                nombrec.setText(planta.getNombre_cientifico());
+//                color.setText(planta.getColor());
+//                localizacion.setText(planta.getLocalizacion());
                 
                 //Crear el grid
                  Button button = new Button();
@@ -148,7 +164,7 @@ public class ConsultaController implements Initializable {
                 grid.setRowIndex(nombreCN, i);
                 grid.setColumnIndex(nombreCN, 1);
                 
-                Label colorN = new Label(planta.getColor());
+                Label colorN = new Label(planta.getDescripcion());
                 grid.setRowIndex(colorN, i);
                 grid.setColumnIndex(colorN, 2);
                 
@@ -174,7 +190,7 @@ public class ConsultaController implements Initializable {
 //        }
 
         } else {
-            alerta.setContentText("No hay resultados con el nombre indicado");
+            alerta.setContentText("No hay registros con el nombre introducido.");
             alerta.showAndWait();
         }
     }

@@ -89,7 +89,7 @@ public class Conexion {
     Connection conexion = conectar ();
     
     try {
-        String select = "select * from flora.plantas where nombre_cientifico like '%" + nombrePlanta + "%' or nombre_comun like '%"+nombrePlanta+"%'";
+        String select = "select * from flora.plantas where nombre_cientifico like '%" + nombrePlanta + "%' or nombre_comun like '%"+nombrePlanta+"%' ORDER BY nombre_cientifico LIMIT 15";
         System.out.println("select:"+select);
         PreparedStatement ps = conexion.prepareStatement(select);
         ResultSet rs = ps.executeQuery();

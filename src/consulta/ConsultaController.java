@@ -69,7 +69,7 @@ public class ConsultaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     public void closeWindows() {
         try {
@@ -81,7 +81,7 @@ public class ConsultaController implements Initializable {
             stage.setScene(scene);
             stage.setTitle("Buscador de Flora");
             stage.show();
-            
+
             Stage mystage = (Stage) this.btbuscar.getScene().getWindow();
             mystage.close();
 
@@ -93,36 +93,23 @@ public class ConsultaController implements Initializable {
     @FXML
     private void btbuscar(ActionEvent event) {
 
-        
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Información");
         alerta.setHeaderText(null);
 
-        if (encuentroRegistro( txtnombre.getText())) {
+        if (encuentroRegistro(txtnombre.getText())) {
             paneResultados.getChildren().remove(grid);
             paneResultados.setVisible(true);
-            grid =new GridPane();
+            grid = new GridPane();
             grid.getColumnConstraints().add(new ColumnConstraints(150)); // column 0 is 100 wide
             grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 1 is 200 wide
             grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 2 is 100 wide
             grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 3 is 200 wide       
             //grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 4 is 200 wide
-            grid.getRowConstraints().add(new RowConstraints (100));
-                    
-            //alerta.setContentText("Sesión iniciada correctamente");
-//                    try {
-            
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/consulta/Consulta.fxml"));
-//         
-//            Parent root = loader.load();
-//            ConsultaController controlador = loader.getController();
-//            Scene scene = new Scene(root);
-//            Stage stage = new Stage();
-//            stage.setScene(scene);
-//            stage.setTitle("Buscador de Flora");
-//            stage.show();a
+            grid.getRowConstraints().add(new RowConstraints(100));
+
             String resultado = "Se han econtrado " + lPlantas.size() + " resutlados";
-            
+
             //Añadir aqui las cabeceras
             Label nombreC = new Label("Nombre Común");
             grid.setRowIndex(nombreC, 0);
@@ -139,107 +126,98 @@ public class ConsultaController implements Initializable {
             Label botonDetalle = new Label("");
             grid.setRowIndex(botonDetalle, 0);
             grid.setColumnIndex(botonDetalle, 3);
-            grid.getChildren().addAll(nombreC, nombreCi,  imagenT, botonDetalle);
+            grid.getChildren().addAll(nombreC, nombreCi, imagenT, botonDetalle);
 
-            
-            for(int i = 1, p = 0; p<lPlantas.size(); p++, i++){
+            for (int i = 1, p = 0; p < lPlantas.size(); p++, i++) {
                 Planta planta = lPlantas.get(p);
-                
-                resultado +=planta.getNombre_cientifico();
+
+                resultado += planta.getNombre_cientifico();
 //                img.setImage(new Image("consulta/imagenes/"+planta.getImagen(), TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
 //                nombre.setText(planta.getNombre_comun());
 //                nombrec.setText(planta.getNombre_cientifico());
 //                color.setText(planta.getColor());
 //                localizacion.setText(planta.getLocalizacion());
-                
+
                 //Crear el grid
-                 Button button = new Button();
-                 
-                 Label nombreN = new Label(planta.getNombre_comun());
+                Button button = new Button();
+
+                Label nombreN = new Label(planta.getNombre_comun());
                 grid.setRowIndex(nombreN, i);
                 grid.setColumnIndex(nombreN, 0);
-                
+
                 Label nombreCN = new Label(planta.getNombre_cientifico());
                 grid.setRowIndex(nombreCN, i);
                 grid.setColumnIndex(nombreCN, 1);
-                
-//                Label colorN = new Label(planta.getDescripcion());
-//                grid.setRowIndex(colorN, i);
-//                grid.setColumnIndex(colorN, 2);
-                
-                 ImageView imagen = new ImageView(new Image("consulta/imagenes/"+planta.getImagen(), TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
+
+                ImageView imagen = new ImageView(new Image("consulta/imagenes/" + planta.getImagen(), TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
                 grid.setRowIndex(imagen, i);
                 grid.setColumnIndex(imagen, 2);
-                
-//                Label lozalizacionN = new Label(planta.getLocalizacion());
-//                grid.setRowIndex(lozalizacionN, i);
-//                grid.setColumnIndex(lozalizacionN, 4);
-                
+
                 Button boton = new Button("Ver detalle");
                 grid.setRowIndex(boton, i);
                 grid.setColumnIndex(boton, 4);
-                    boton.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override public void handle(ActionEvent e) {
+                boton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
                         boton.setText("Clicked");
-                        detallePlanta(planta.getNombre_comun());
+                        detallePlanta(planta.getNombre_comun(), planta.getNombre_cientifico(), planta.getDescripcion(), planta.getLocalizacion(), planta.getColor(), planta.getImagen());
+                        
                     }
-});
-                // "detallePlanta(planta1.getNombre_counm()")
-                //boton.onMouseClickedProperty().addListener(listener);
-                
-                
-                grid.getChildren().addAll(nombreN, nombreCN,  imagen, boton);
+                });
+
+                grid.getChildren().addAll(nombreN, nombreCN, imagen, boton);
             }
             paneResultados.getChildren().add(grid);
             alerta.setContentText(resultado);
             alerta.showAndWait();
-            //stage.setOnCloseRequest(e -> controlador.closeWindows());
-            //Stage mystage = (Stage) this.btsesion.getScene().getWindow();
-            //mystage.close();
-
-//        } catch (IOException ex) {
-//            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
         } else {
             alerta.setContentText("No hay registros con el nombre introducido.");
             alerta.showAndWait();
         }
     }
-    
+
     @FXML
-    private void detallePlanta(String nombrePlanta){
-        System.out.println("consulta.ConsultaController.detallePlanta() " +nombrePlanta);
-     //Mostrar nueva ventana   
- 
+    private void detallePlanta(String nombreComun, String nombreCientifico, String descripcion, String localizacion, String color, String imagen) {
+     
+        //Mostrar nueva ventana   
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detalleplanta/Detalle.fxml"));
             Parent root = loader.load();
             DetalleController controlador = loader.getController();
-           Scene scene = new Scene(root);
-           Stage stage = new Stage();
-           stage.setScene(scene);
-           stage.setTitle("Detalle de " + nombrePlanta);
+            controlador.setNombrecomun(nombreComun);
+            controlador.setNombrecientifico(nombreCientifico);
+            controlador.setDescripcion(descripcion);
+            controlador.setLocalizacion(localizacion);
+            controlador.setImagen(imagen);
+            controlador.setColor(color);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Detalle de " + nombreCientifico);
 
-           stage.show();
+            stage.show();
         } catch (IOException ex) {
             Logger.getLogger(ConsultaController.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
+
     }
-    
-     private boolean encuentroRegistro(String nombrePlanta){
+
+    private boolean encuentroRegistro(String nombrePlanta) {
         Conexion conexion = new Conexion();
         lPlantas = conexion.buscarPlantas(nombrePlanta);
-        if(lPlantas != null && lPlantas.size() > 0) return true;
-        for(Planta planta: lPlantas){
+        if (lPlantas != null && lPlantas.size() > 0) {
+            return true;
+        }
+        for (Planta planta : lPlantas) {
             System.out.println(planta.getNombre_cientifico());
             System.out.println(planta.getNombre_comun());
             System.out.println(planta.getLocalizacion());
-      
+
         }
         return false;
-    
+
     }
-    
+
 }

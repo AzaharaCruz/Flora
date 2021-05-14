@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -19,6 +20,8 @@ import javafx.scene.image.ImageView;
  */
  
 public class DetalleController implements Initializable {
+   
+private final static int TAMANIO_IMAGEN = 200;
     
 @FXML
 private TextField txtnombrecomun;
@@ -37,9 +40,30 @@ private ImageView imgresultado;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
     
     }
 
-    
-    
+    public void setNombrecomun(String nombrecomun){
+    txtnombrecomun.setText(nombrecomun);
+   
+    }
+    public void setNombrecientifico (String nombrecientifico){
+    txtnombrecientifico.setText(nombrecientifico);
+    }
+    public void setDescripcion(String descricion) {
+        txtdescripcion.setText(descricion);
+    }
+    public void setLocalizacion(String localizacion) {
+        txtlocalizacion.setText(localizacion);
+    }
+    public void setColor(String color) {
+        txtcolor.setText(color);
+    }
+     public void setImagen(String imagen) {
+        imgresultado.setImage(new Image("consulta/imagenes/" + imagen, TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
+    }
+
+
 }

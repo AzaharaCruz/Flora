@@ -48,7 +48,6 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void btsesion(ActionEvent event) {
 
-        
         Alert alerta = new Alert(AlertType.INFORMATION);
         alerta.setTitle("Información");
         alerta.setHeaderText(null);
@@ -58,11 +57,10 @@ public class FXMLDocumentController implements Initializable {
 
         if (esLoginCorrecto(txtusuario.getText(), txtcontrasenia.getText())) {
 
-            //alerta.setContentText("Sesión iniciada correctamente");
+           
                     try {
-            
+            //Acceso a siguiente pantalla
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/consulta/Consulta.fxml"));
-         
             Parent root = loader.load();
             ConsultaController controlador = loader.getController();
             Scene scene = new Scene(root);

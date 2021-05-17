@@ -33,20 +33,7 @@ public class Conexion {
         }
         return conexion;
     }
-    
-   /* public ResultSet visualizar (String nombre) {
-    Connection conexion = conectar ();
-    ResultSet consulta = null;
-    try{
-        PreparedStatement ps = conexion.prepareStatement("select*from plantas where nombre like '*" + nombre + "*'");
-         consulta = ps.executeQuery();
-         //for por el resultset y crear lista de plantaas
-    }catch(Exception e){
-    System.out.println ("Error en la consulta");
-    }
-        return consulta;
-    }*/
-    
+
     public Usuario login (String usuario, String pass) {
     Connection conexion = conectar ();
     Usuario usuario1 = null;
@@ -71,7 +58,6 @@ public class Conexion {
                        usuario1.setApellidos(rs.getString(4));
                        usuario1.setEmail(rs.getString(5));
                    }
-         //for por el resultset y crear lista de plantaas
     }catch(Exception e){
     System.out.println ("Error en la consulta");
     }
@@ -109,13 +95,12 @@ public class Conexion {
                        planta1.setDescripcion(rs.getString(2));
                        planta1.setLocalizacion(rs.getString(3));
                        planta1.setColor(rs.getString(4));
-                       
                        planta1.setNombre_cientifico(rs.getString(5));
                        planta1.setImagen(rs.getString(6));
                        lPlantas.add(planta1);
                                       
                    }
-         //for por el resultset y crear lista de plantaas
+        
     }catch(Exception e){
     System.out.println ("Error en la consulta" + e.getLocalizedMessage());
     }

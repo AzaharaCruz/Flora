@@ -46,16 +46,7 @@ public class ConsultaController implements Initializable {
     private TextField txtnombre;
     @FXML
     private Button btbuscar;
-//    @FXML
-//    private Label nombre;
-//    @FXML
-//    private Label nombrec;
-//    @FXML
-//    private Label color;
-//    @FXML
-//    private Label localizacion;
-//    @FXML
-//    private ImageView img;
+
     
     @FXML
     private GridPane grid;
@@ -101,11 +92,10 @@ public class ConsultaController implements Initializable {
             paneResultados.getChildren().remove(grid);
             paneResultados.setVisible(true);
             grid = new GridPane();
-            grid.getColumnConstraints().add(new ColumnConstraints(150)); // column 0 is 100 wide
-            grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 1 is 200 wide
-            grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 2 is 100 wide
-            grid.getColumnConstraints().add(new ColumnConstraints(100)); // column 3 is 200 wide       
-            //grid.getColumnConstraints().add(new ColumnConstraints(200)); // column 4 is 200 wide
+            grid.getColumnConstraints().add(new ColumnConstraints(150)); 
+            grid.getColumnConstraints().add(new ColumnConstraints(200)); 
+            grid.getColumnConstraints().add(new ColumnConstraints(100)); 
+            grid.getColumnConstraints().add(new ColumnConstraints(100));       
             grid.getRowConstraints().add(new RowConstraints(100));
 
             String resultado = "Se han econtrado " + lPlantas.size() + " resutlados";
@@ -117,9 +107,7 @@ public class ConsultaController implements Initializable {
             Label nombreCi = new Label("Nombre científico");
             grid.setRowIndex(nombreCi, 0);
             grid.setColumnIndex(nombreCi, 1);
-//            Label nombreLabel3 = new Label("Descripción");
-//            grid.setRowIndex(nombreLabel3, 0);
-//            grid.setColumnIndex(nombreLabel3, 2);
+
             Label imagenT = new Label("Imagen");
             grid.setRowIndex(imagenT, 0);
             grid.setColumnIndex(imagenT, 2);
@@ -132,12 +120,6 @@ public class ConsultaController implements Initializable {
                 Planta planta = lPlantas.get(p);
 
                 resultado += planta.getNombre_cientifico();
-//                img.setImage(new Image("consulta/imagenes/"+planta.getImagen(), TAMANIO_IMAGEN, TAMANIO_IMAGEN, false, false));
-//                nombre.setText(planta.getNombre_comun());
-//                nombrec.setText(planta.getNombre_cientifico());
-//                color.setText(planta.getColor());
-//                localizacion.setText(planta.getLocalizacion());
-
                 //Crear el grid
                 Button button = new Button();
 
@@ -156,6 +138,7 @@ public class ConsultaController implements Initializable {
                 Button boton = new Button("Ver detalle");
                 grid.setRowIndex(boton, i);
                 grid.setColumnIndex(boton, 4);
+                
                 boton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
@@ -179,8 +162,6 @@ public class ConsultaController implements Initializable {
 
     @FXML
     private void detallePlanta(String nombreComun, String nombreCientifico, String descripcion, String localizacion, String color, String imagen) {
-     
-        //Mostrar nueva ventana   
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/detalleplanta/Detalle.fxml"));
